@@ -7,8 +7,11 @@ let currentHash: Buffer;
 
 do {
   currentHash = calculateShaHash(Buffer.concat([currentPrefix, input]));
+  if (targetSuffix.compare(currentHash, currentHash.length - targetSuffix.length) == 0) {
+    break;
+  }
   incrementBE(currentPrefix);
-} while (targetSuffix.compare(currentHash, currentHash.length - targetSuffix.length) != 0);
+} while (true);
 
 console.log(`hash: ${currentHash.toString('hex')}`);
 console.log(`prefix: ${currentPrefix.toString('hex')}`);
